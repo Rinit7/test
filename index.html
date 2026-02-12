@@ -38,7 +38,7 @@
 body {
   font-family: 'Playfair Display', serif;
   background: linear-gradient(135deg, #ffe6f0, #ffd6ec, #ffc2e0);
-  height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -51,16 +51,21 @@ body {
 body::before {
   content: "";
   position: absolute;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 60%);
-  animation: glowMove 12s linear infinite;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+  animation: softPulse 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@keyframes glowMove {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes softPulse {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
+
 
 /* =============================
    💖 FLOATING HEARTS
@@ -377,3 +382,4 @@ function moveButton() {
 
 </body>
 </html>
+
