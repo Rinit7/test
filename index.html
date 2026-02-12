@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Be My Valentine 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
@@ -21,88 +21,82 @@ html, body {
 
 body {
   font-family: 'Playfair Display', serif;
-  background: linear-gradient(180deg, #f7c9da 0%, #f4b6cc 100%);
+  background: radial-gradient(circle at top, #ff8fb8, #c2185b);
   min-height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  overflow-x: hidden;
+  padding: 24px;
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+  overflow: hidden;
   position: relative;
-  transition: background 0.8s ease;
+  transition: background 0.6s ease;
 }
 
-/* Floating hearts */
+/* Floating Hearts */
 .heart {
   position: absolute;
   font-size: 14px;
-  opacity: 0.4;
+  opacity: 0.25;
   animation: floatUp linear infinite;
   pointer-events: none;
 }
 
 @keyframes floatUp {
   0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
-  30% { opacity: 0.6; }
-  100% { transform: translateY(-15vh) scale(1.1); opacity: 0; }
+  40% { opacity: 0.4; }
+  100% { transform: translateY(-15vh) scale(1); opacity: 0; }
 }
 
 /* Card */
 .card {
   width: 100%;
-  max-width: 400px;
-  padding: 32px 24px;
+  max-width: 380px;
+  padding: 30px 24px 34px;
   border-radius: 28px;
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.2);
   box-shadow:
-    0 20px 60px rgba(255, 105, 180, 0.15),
-    0 8px 25px rgba(0,0,0,0.08);
+    0 20px 60px rgba(0,0,0,0.25),
+    0 0 40px rgba(255,105,180,0.15);
   text-align: center;
-  animation: fadeIn 1.2s ease forwards;
-  position: relative;
+  animation: fadeIn 1s ease forwards;
   z-index: 5;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  from { opacity: 0; transform: translateY(25px) scale(0.95); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 34px;
-  color: #ff2e7a;
+  font-size: 32px;
+  color: #ffb3d1;
   margin-bottom: 12px;
 }
 
 .subtext {
-  font-size: 15px;
-  color: #6a2c4f;
-  margin-bottom: 28px;
+  font-size: 14px;
+  color: #ffd9e6;
+  margin-bottom: 24px;
   line-height: 1.6;
 }
 
 .question {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 34px;
-  color: #4b1f36;
-  animation: pulse 2.5s infinite;
-}
-
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  margin-bottom: 30px;
+  color: #ffffff;
 }
 
 /* Buttons */
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
-  position: relative;
 }
 
 button {
@@ -112,58 +106,52 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* YES button */
+/* YES */
 #yesBtn {
   width: 85%;
-  max-width: 280px;
-  padding: 16px 24px;
+  max-width: 260px;
+  padding: 16px;
   border-radius: 50px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  background: linear-gradient(135deg, #ff5ca8, #ff2e7a);
+  background: linear-gradient(135deg, #ff4d94, #ff0066);
   color: white;
   box-shadow:
-    0 8px 25px rgba(255, 80, 140, 0.4),
-    0 0 20px rgba(255, 80, 140, 0.3);
-}
-
-#yesBtn:hover {
-  transform: scale(1.05);
+    0 8px 25px rgba(255, 0, 102, 0.4),
+    0 0 30px rgba(255, 0, 102, 0.2);
 }
 
 #yesBtn:active {
   transform: scale(0.95);
 }
 
-/* NO button */
+/* NO */
 #noBtn {
   width: 60%;
   max-width: 180px;
   padding: 12px;
   border-radius: 40px;
   font-size: 14px;
-  background: rgba(255,255,255,0.85);
-  color: #ff2e7a;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  position: relative;
+  background: rgba(255,255,255,0.2);
+  color: #ffd9e6;
 }
 
-/* Success message */
+/* Success */
 .success {
-  margin-top: 26px;
-  font-size: 18px;
-  color: #d1006b;
+  margin-top: 24px;
+  font-size: 16px;
+  color: #ffe6f2;
   display: none;
-  line-height: 1.6;
 }
 
+/* Footer */
 footer {
-  position: fixed;
-  bottom: 12px;
+  position: absolute;
+  bottom: 18px;
   width: 100%;
   text-align: center;
   font-size: 12px;
-  color: #a14b75;
+  color: #ffd9e6;
   opacity: 0.8;
 }
 </style>
@@ -172,12 +160,12 @@ footer {
 <body>
 
 <script>
-for (let i = 0; i < 15; i++) {
+for (let i = 0; i < 12; i++) {
   const heart = document.createElement("div");
   heart.className = "heart";
   heart.innerHTML = "💖";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 8 + Math.random() * 6 + "s";
+  heart.style.animationDuration = 10 + Math.random() * 5 + "s";
   document.body.appendChild(heart);
 }
 </script>
@@ -207,35 +195,22 @@ const noBtn = document.getElementById("noBtn");
 const successMsg = document.getElementById("successMsg");
 
 yesBtn.addEventListener("click", function(){
-
   if (navigator.vibrate) navigator.vibrate([200,100,300]);
 
   document.body.style.background =
-    "linear-gradient(135deg,#ff0080,#ff4da6,#ff66cc,#ff1a8c)";
+    "radial-gradient(circle at center, #ff4d94, #8b0038)";
 
   successMsg.style.display = "block";
   successMsg.innerHTML = "YAYYY 🥰 I love you so much!";
 
   yesBtn.innerHTML = "FOREVER 💍";
-  yesBtn.style.transform = "scale(1.2)";
-
-  const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e3c7d.mp3?filename=romantic-ambient-110624.mp3");
-  audio.volume = 0.8;
-  audio.play();
+  yesBtn.style.transform = "scale(1.15)";
 
   emailjs.send("service_aetl4cb", "template_o737c9d", {
-    to_email: "swanitrivankar@gmail.com",
-    message: `Hi my love ❤️  
-You just clicked YES to being my Valentine 🥹💖  
-This is officially documented now — no backing out 😌  
-I’m so lucky to have you.  
-
-Love,  
-Swanit`
+    to_email: "swanitrivankar@gmail.com"
   });
 });
 
-/* NO button playful movement */
 const phrases = [
   "Are you sure?",
   "Really sure?",
@@ -250,13 +225,13 @@ function moveButton() {
   attempts++;
   noBtn.innerText = phrases[attempts % phrases.length];
 
-  const x = (Math.random() - 0.5) * 200;
-  const y = (Math.random() - 0.5) * 100;
+  const x = (Math.random() - 0.5) * 160;
+  const y = (Math.random() - 0.5) * 80;
 
   noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
 
   if (attempts >= 5) {
-    yesBtn.style.transform = "scale(1.3)";
+    yesBtn.style.transform = "scale(1.25)";
     noBtn.style.transform = "scale(0.5)";
   }
 }
