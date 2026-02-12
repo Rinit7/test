@@ -12,22 +12,8 @@ dmnv<!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
-  @keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-/* =============================
-   🌸 GLOBAL STYLES
+  /* =============================
+   🌸 MOBILE-FIRST PREMIUM STYLES
 ============================= */
 * {
   margin: 0;
@@ -35,41 +21,43 @@ dmnv<!DOCTYPE html>
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Playfair Display', serif;
   background: linear-gradient(135deg, #ffe6f0, #ffd6ec, #ffc2e0);
-  height: 100vh;
-  overflow: hidden;
+  background-size: 200% 200%;
+  animation: bgMove 12s ease infinite;
+  min-height: 100svh; /* Better mobile viewport */
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
   position: relative;
+  overflow-x: hidden;
   transition: background 1s ease;
 }
 
-/* Floating gradient glow */
-body::before {
-  content: "";
-  position: absolute;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 60%);
-  animation: glowMove 12s linear infinite;
-}
-
-@keyframes glowMove {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Soft moving gradient */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* =============================
-   💖 FLOATING HEARTS
+   💖 FLOATING HEARTS (SOFTER)
 ============================= */
 .heart {
   position: absolute;
-  font-size: 20px;
-  animation: floatUp 8s linear infinite;
-  opacity: 0.6;
+  font-size: 16px;
+  animation: floatUp 10s linear infinite;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 @keyframes floatUp {
@@ -77,110 +65,131 @@ body::before {
     transform: translateY(100vh) scale(0.5);
     opacity: 0;
   }
-  50% { opacity: 0.8; }
+  40% { opacity: 0.5; }
   100% {
-    transform: translateY(-10vh) scale(1.2);
+    transform: translateY(-15vh) scale(1.1);
     opacity: 0;
   }
 }
 
 /* =============================
-   💎 GLASS CARD
+   💎 GLASS CARD (MORE PREMIUM)
 ============================= */
 .card {
-  width: 90%;
+  width: 100%;
   max-width: 420px;
-  padding: 30px;
-  border-radius: 25px;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+  padding: 32px 24px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 8px 40px rgba(255, 105, 180, 0.25),
+    inset 0 0 20px rgba(255,255,255,0.4);
   text-align: center;
-  animation: fadeInScale 1.5s ease forwards;
-  z-index: 10;
+  animation: fadeInScale 1.2s ease forwards;
+  position: relative;
+  z-index: 5;
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+/* Heading */
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 42px;
-  color: #ff4d88;
-  margin-bottom: 10px;
+  font-size: 36px;
+  color: #ff2e7a;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
 }
 
+/* Subtext */
 .subtext {
-  font-size: 16px;
-  margin-bottom: 25px;
-  color: #5e2a45;
+  font-size: 15px;
+  margin-bottom: 28px;
+  color: #6a2c4f;
+  line-height: 1.6;
 }
 
+/* Question */
 .question {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
-  margin-bottom: 30px;
-  animation: pulse 2s infinite;
+  margin-bottom: 36px;
+  color: #4b1f36;
+  animation: pulse 2.5s infinite;
 }
 
 @keyframes pulse {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.06); }
 }
 
 /* =============================
-   💘 BUTTONS
+   💘 BUTTONS (THUMB FRIENDLY)
 ============================= */
 .buttons {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 
 button {
-  padding: 12px 20px;
-  border-radius: 30px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 40px;
   border: none;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* YES BUTTON */
 #yesBtn {
-  background: linear-gradient(45deg, #ff66a3, #ff3385);
+  background: linear-gradient(45deg, #ff5ca8, #ff2e7a);
   color: white;
-  box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+  box-shadow:
+    0 0 20px rgba(255, 80, 140, 0.6),
+    0 4px 20px rgba(255, 0, 120, 0.4);
 }
 
-#yesBtn:hover {
-  transform: scale(1.1);
+#yesBtn:active {
+  transform: scale(0.95);
 }
 
+/* NO BUTTON */
 #noBtn {
-  background: white;
-  color: #ff4d88;
-  position: relative;
+  background: rgba(255,255,255,0.8);
+  color: #ff2e7a;
+  font-weight: 500;
 }
 
 /* Success message */
 .success {
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 28px;
+  font-size: 18px;
   color: #d1006b;
   display: none;
-  animation: fadeInScale 1s ease forwards;
+  line-height: 1.6;
+  animation: fadeInScale 0.8s ease forwards;
 }
 
 /* Footer */
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
-  font-size: 13px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
   color: #a14b75;
+  opacity: 0.8;
 }
 </style>
 </head>
@@ -200,7 +209,7 @@ for (let i = 0; i < 20; i++) {
 </script>
 
 <div class="card">
-  <h1>Hey Babe ❤️</h1>
+  <h1>Hey Samruddhi ❤️</h1>
   <div class="subtext">I have something very important to ask you…</div>
   <div class="question">Will you be my Valentine?</div>
 
@@ -377,5 +386,6 @@ function moveButton() {
 
 </body>
 </html>
+
 
 
