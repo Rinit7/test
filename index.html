@@ -1,20 +1,14 @@
-dmnv<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Be My Valentine 💖</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
-<!-- EmailJS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
-  /* =============================
-   🌸 MOBILE-FIRST PREMIUM STYLES
-============================= */
 * {
   margin: 0;
   padding: 0;
@@ -27,164 +21,145 @@ html, body {
 
 body {
   font-family: 'Playfair Display', serif;
-  background: linear-gradient(135deg, #ffe6f0, #ffd6ec, #ffc2e0);
-  background-size: 200% 200%;
-  animation: bgMove 12s ease infinite;
-  min-height: 100svh; /* Better mobile viewport */
+  background: linear-gradient(180deg, #f7c9da 0%, #f4b6cc 100%);
+  min-height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  padding-top: calc(20px + env(safe-area-inset-top));
-  padding-bottom: calc(20px + env(safe-area-inset-bottom));
-  position: relative;
   overflow-x: hidden;
-  transition: background 1s ease;
+  position: relative;
+  transition: background 0.8s ease;
 }
 
-/* Soft moving gradient */
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* =============================
-   💖 FLOATING HEARTS (SOFTER)
-============================= */
+/* Floating hearts */
 .heart {
   position: absolute;
-  font-size: 16px;
-  animation: floatUp 10s linear infinite;
+  font-size: 14px;
   opacity: 0.4;
+  animation: floatUp linear infinite;
   pointer-events: none;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(100vh) scale(0.5);
-    opacity: 0;
-  }
-  40% { opacity: 0.5; }
-  100% {
-    transform: translateY(-15vh) scale(1.1);
-    opacity: 0;
-  }
+  0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+  30% { opacity: 0.6; }
+  100% { transform: translateY(-15vh) scale(1.1); opacity: 0; }
 }
 
-/* =============================
-   💎 GLASS CARD (MORE PREMIUM)
-============================= */
+/* Card */
 .card {
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   padding: 32px 24px;
   border-radius: 28px;
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(20px);
   box-shadow:
-    0 8px 40px rgba(255, 105, 180, 0.25),
-    inset 0 0 20px rgba(255,255,255,0.4);
+    0 20px 60px rgba(255, 105, 180, 0.15),
+    0 8px 25px rgba(0,0,0,0.08);
   text-align: center;
-  animation: fadeInScale 1.2s ease forwards;
+  animation: fadeIn 1.2s ease forwards;
   position: relative;
   z-index: 5;
 }
 
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.9) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Heading */
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 36px;
+  font-size: 34px;
   color: #ff2e7a;
-  margin-bottom: 14px;
-  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
-/* Subtext */
 .subtext {
   font-size: 15px;
-  margin-bottom: 28px;
   color: #6a2c4f;
+  margin-bottom: 28px;
   line-height: 1.6;
 }
 
-/* Question */
 .question {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 600;
-  margin-bottom: 36px;
+  margin-bottom: 34px;
   color: #4b1f36;
   animation: pulse 2.5s infinite;
 }
 
 @keyframes pulse {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+  50% { transform: scale(1.05); }
 }
 
-/* =============================
-   💘 BUTTONS (THUMB FRIENDLY)
-============================= */
+/* Buttons */
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   align-items: center;
+  position: relative;
 }
 
 button {
-  width: 100%;
-  padding: 16px;
-  border-radius: 40px;
   border: none;
-  font-size: 18px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* YES BUTTON */
+/* YES button */
 #yesBtn {
-  background: linear-gradient(45deg, #ff5ca8, #ff2e7a);
+  width: 85%;
+  max-width: 280px;
+  padding: 16px 24px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff5ca8, #ff2e7a);
   color: white;
   box-shadow:
-    0 0 20px rgba(255, 80, 140, 0.6),
-    0 4px 20px rgba(255, 0, 120, 0.4);
+    0 8px 25px rgba(255, 80, 140, 0.4),
+    0 0 20px rgba(255, 80, 140, 0.3);
+}
+
+#yesBtn:hover {
+  transform: scale(1.05);
 }
 
 #yesBtn:active {
   transform: scale(0.95);
 }
 
-/* NO BUTTON */
+/* NO button */
 #noBtn {
-  background: rgba(255,255,255,0.8);
+  width: 60%;
+  max-width: 180px;
+  padding: 12px;
+  border-radius: 40px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.85);
   color: #ff2e7a;
-  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
 }
 
 /* Success message */
 .success {
-  margin-top: 28px;
+  margin-top: 26px;
   font-size: 18px;
   color: #d1006b;
   display: none;
   line-height: 1.6;
-  animation: fadeInScale 0.8s ease forwards;
 }
 
-/* Footer */
 footer {
   position: fixed;
-  bottom: 10px;
-  left: 0;
+  bottom: 12px;
   width: 100%;
   text-align: center;
   font-size: 12px;
@@ -196,14 +171,13 @@ footer {
 
 <body>
 
-<!-- 💖 Floating Hearts -->
 <script>
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 15; i++) {
   const heart = document.createElement("div");
-  heart.classList.add("heart");
+  heart.className = "heart";
   heart.innerHTML = "💖";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 6 + Math.random() * 5 + "s";
+  heart.style.animationDuration = 8 + Math.random() * 6 + "s";
   document.body.appendChild(heart);
 }
 </script>
@@ -218,143 +192,50 @@ for (let i = 0; i < 20; i++) {
     <button id="noBtn">NO 🙈</button>
   </div>
 
-  <div class="success" id="successMsg">
-    YAYYY 🥰 I love you so much!
-  </div>
+  <div class="success" id="successMsg"></div>
 </div>
 
 <footer>Made with ❤️</footer>
 
 <script>
-/* =============================
-   ✨ EMAILJS CONFIG
-============================= */
-/*
-1. Create account at https://www.emailjs.com/
-2. Create Email Service (Gmail).
-3. Create Template.
-4. Replace placeholders below.
-*/
-
 (function(){
   emailjs.init("iauqHcCBGEfMpcrui");
 })();
 
-/* =============================
-   💘 ULTRA DRAMATIC YES BUTTON
-============================= */
 const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 const successMsg = document.getElementById("successMsg");
 
 yesBtn.addEventListener("click", function(){
 
-  /* 🌸 VIBRATION PATTERN */
-  if (navigator.vibrate) navigator.vibrate([200,100,300,100,500]);
+  if (navigator.vibrate) navigator.vibrate([200,100,300]);
 
-  /* 💥 SCREEN FLASH */
-  const flash = document.createElement("div");
-  flash.style.position = "fixed";
-  flash.style.inset = "0";
-  flash.style.background = "white";
-  flash.style.opacity = "0.9";
-  flash.style.zIndex = "999";
-  flash.style.transition = "opacity 0.8s ease";
-  document.body.appendChild(flash);
+  document.body.style.background =
+    "linear-gradient(135deg,#ff0080,#ff4da6,#ff66cc,#ff1a8c)";
 
-  setTimeout(() => flash.style.opacity = "0", 100);
-  setTimeout(() => flash.remove(), 900);
-
-  /* 💗 BACKGROUND TRANSFORM */
-  document.body.style.background = 
-  "linear-gradient(135deg,#ff0080,#ff4da6,#ff66cc,#ff1a8c)";
-  document.body.style.backgroundSize = "300% 300%";
-  document.body.style.animation = "bgMove 6s ease infinite";
-
-  /* 🎆 HEART FIREWORKS */
-  for (let i = 0; i < 80; i++) {
-    const heart = document.createElement("div");
-    heart.innerHTML = ["💖","💘","💗","💞"][Math.floor(Math.random()*4)];
-    heart.style.position = "absolute";
-    heart.style.left = "50%";
-    heart.style.top = "50%";
-    heart.style.fontSize = "20px";
-    heart.style.pointerEvents = "none";
-    heart.style.transform = `translate(-50%, -50%)`;
-    heart.style.transition = "all 2s ease-out";
-
-    document.body.appendChild(heart);
-
-    const angle = Math.random() * 2 * Math.PI;
-    const radius = 200 + Math.random()*200;
-
-    setTimeout(() => {
-      heart.style.transform =
-        `translate(${Math.cos(angle)*radius}px, ${Math.sin(angle)*radius}px) scale(1.5)`;
-      heart.style.opacity = "0";
-    }, 50);
-
-    setTimeout(() => heart.remove(), 2000);
-  }
-
-  /* ✨ SPARKLE RAIN */
-  for (let i = 0; i < 60; i++) {
-    const sparkle = document.createElement("div");
-    sparkle.innerHTML = "✨";
-    sparkle.style.position = "absolute";
-    sparkle.style.left = Math.random() * 100 + "vw";
-    sparkle.style.top = "-10px";
-    sparkle.style.fontSize = "18px";
-    sparkle.style.animation = "floatUp 4s linear forwards";
-    document.body.appendChild(sparkle);
-  }
-
-  /* 💌 TYPEWRITER MESSAGE */
   successMsg.style.display = "block";
-  successMsg.innerHTML = "";
-  const text = "YAYYY 🥰 I love you so much!";
-  let i = 0;
+  successMsg.innerHTML = "YAYYY 🥰 I love you so much!";
 
-  function typeWriter(){
-    if (i < text.length){
-      successMsg.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 50);
-    }
-  }
-  typeWriter();
-
-  /* 💖 BUTTON MORPH */
-  yesBtn.style.transform = "scale(1.5)";
-  yesBtn.style.boxShadow = "0 0 40px #ff99cc, 0 0 80px #ff66b3";
   yesBtn.innerHTML = "FOREVER 💍";
+  yesBtn.style.transform = "scale(1.2)";
 
-  /* 🎥 SUBTLE CAMERA SHAKE */
-  document.body.style.animation += ", shake 0.5s ease";
-
-  /* 🎶 ROMANTIC SWELL SOUND */
   const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e3c7d.mp3?filename=romantic-ambient-110624.mp3");
   audio.volume = 0.8;
   audio.play();
 
-  /* 💌 SEND EMAIL */
   emailjs.send("service_aetl4cb", "template_o737c9d", {
     to_email: "swanitrivankar@gmail.com",
     message: `Hi my love ❤️  
 You just clicked YES to being my Valentine 🥹💖  
 This is officially documented now — no backing out 😌  
 I’m so lucky to have you.  
-  
+
 Love,  
 Swanit`
   });
-
 });
 
-
-/* =============================
-   🙈 NO BUTTON FUN
-============================= */
-const noBtn = document.getElementById("noBtn");
+/* NO button playful movement */
 const phrases = [
   "Are you sure?",
   "Really sure?",
@@ -365,27 +246,24 @@ const phrases = [
 
 let attempts = 0;
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
-
 function moveButton() {
   attempts++;
   noBtn.innerText = phrases[attempts % phrases.length];
 
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
+  const x = (Math.random() - 0.5) * 200;
+  const y = (Math.random() - 0.5) * 100;
 
   noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
 
   if (attempts >= 5) {
-    yesBtn.style.transform = "scale(1.4)";
-    noBtn.style.transform = "scale(0.4)";
+    yesBtn.style.transform = "scale(1.3)";
+    noBtn.style.transform = "scale(0.5)";
   }
 }
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
 </script>
 
 </body>
 </html>
-
-
-
