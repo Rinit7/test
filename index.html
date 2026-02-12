@@ -2,188 +2,205 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Be My Valentine 💖</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- EmailJS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
+  @keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* =============================
+   🌸 GLOBAL STYLES
+============================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   font-family: 'Playfair Display', serif;
-  background: linear-gradient(180deg, #ffb3c6 0%, #b3003c 100%);
-  min-height: 100svh;
+  background: linear-gradient(135deg, #ffe6f0, #ffd6ec, #ffc2e0);
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
-  padding-bottom: calc(28px + env(safe-area-inset-bottom));
   position: relative;
-  overflow: hidden;
-  transition: background 0.6s ease;
+  transition: background 1s ease;
 }
 
-/* Subtle glow halo */
+/* Floating gradient glow */
 body::before {
   content: "";
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
-  top: -150px;
-  left: 50%;
-  transform: translateX(-50%);
-  filter: blur(60px);
-  z-index: 0;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 60%);
+  animation: glowMove 12s linear infinite;
 }
 
-/* Floating hearts */
+@keyframes glowMove {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* =============================
+   💖 FLOATING HEARTS
+============================= */
 .heart {
   position: absolute;
-  font-size: 14px;
-  opacity: 0.2;
-  animation: floatUp linear infinite;
-  pointer-events: none;
+  font-size: 20px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.6;
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
-  30% { opacity: 0.3; }
-  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% { opacity: 0.8; }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
 }
 
-/* Card */
+/* =============================
+   💎 GLASS CARD
+============================= */
 .card {
-  width: 100%;
-  max-width: 380px;
-  padding: 32px 24px 36px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.35),
-    0 10px 25px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
   text-align: center;
-  z-index: 5;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeInScale 1.5s ease forwards;
+  z-index: 10;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 32px;
-  color: #ffe6ef;
-  margin-bottom: 14px;
+  font-size: 42px;
+  color: #ff4d88;
+  margin-bottom: 10px;
 }
 
 .subtext {
-  font-size: 14px;
-  color: #ffd6e5;
-  margin-bottom: 26px;
-  line-height: 1.6;
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #5e2a45;
 }
 
 .question {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 30px;
-  color: #ffffff;
+  animation: pulse 2s infinite;
 }
 
-/* Buttons */
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* =============================
+   💘 BUTTONS
+============================= */
 .buttons {
   display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
 }
 
 button {
+  padding: 12px 20px;
+  border-radius: 30px;
   border: none;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* YES */
 #yesBtn {
-  width: 85%;
-  max-width: 260px;
-  padding: 16px;
-  border-radius: 50px;
-  font-size: 17px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ff4d94, #ff0066);
+  background: linear-gradient(45deg, #ff66a3, #ff3385);
   color: white;
-  box-shadow:
-    0 6px 20px rgba(255, 0, 102, 0.4),
-    0 0 25px rgba(255, 0, 102, 0.25);
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
 }
 
-#yesBtn:active {
-  transform: scale(0.95);
+#yesBtn:hover {
+  transform: scale(1.1);
 }
 
-/* NO */
 #noBtn {
-  width: 60%;
-  max-width: 180px;
-  padding: 12px;
-  border-radius: 40px;
-  font-size: 14px;
-  background: rgba(255,255,255,0.15);
-  color: #ffd6e5;
+  background: white;
+  color: #ff4d88;
+  position: relative;
 }
 
-/* Success */
+/* Success message */
 .success {
-  margin-top: 24px;
-  font-size: 16px;
-  color: #ffe6ef;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #d1006b;
   display: none;
+  animation: fadeInScale 1s ease forwards;
 }
 
+/* Footer */
 footer {
   position: absolute;
-  bottom: 16px;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  color: #ffd6e5;
-  opacity: 0.8;
+  bottom: 10px;
+  font-size: 13px;
+  color: #a14b75;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 💖 Floating Hearts -->
 <script>
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 20; i++) {
   const heart = document.createElement("div");
-  heart.className = "heart";
+  heart.classList.add("heart");
   heart.innerHTML = "💖";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 12 + Math.random() * 6 + "s";
+  heart.style.animationDuration = 6 + Math.random() * 5 + "s";
   document.body.appendChild(heart);
 }
 </script>
 
 <div class="card">
-  <h1>Hey Samruddhi ❤️</h1>
+  <h1>Hey [Her Name] ❤️</h1>
   <div class="subtext">I have something very important to ask you…</div>
   <div class="question">Will you be my Valentine?</div>
 
@@ -192,31 +209,143 @@ for (let i = 0; i < 10; i++) {
     <button id="noBtn">NO 🙈</button>
   </div>
 
-  <div class="success" id="successMsg"></div>
+  <div class="success" id="successMsg">
+    YAYYY 🥰 I love you so much!
+  </div>
 </div>
 
-<footer>Made with ❤️</footer>
+<footer>Made with ❤️ by [Your Name]</footer>
 
 <script>
+/* =============================
+   ✨ EMAILJS CONFIG
+============================= */
+/*
+1. Create account at https://www.emailjs.com/
+2. Create Email Service (Gmail).
+3. Create Template.
+4. Replace placeholders below.
+*/
+
 (function(){
   emailjs.init("iauqHcCBGEfMpcrui");
 })();
 
+/* =============================
+   💘 ULTRA DRAMATIC YES BUTTON
+============================= */
 const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
 const successMsg = document.getElementById("successMsg");
 
 yesBtn.addEventListener("click", function(){
-  document.body.style.background =
-    "linear-gradient(180deg, #ff4d94 0%, #660029 100%)";
 
+  /* 🌸 VIBRATION PATTERN */
+  if (navigator.vibrate) navigator.vibrate([200,100,300,100,500]);
+
+  /* 💥 SCREEN FLASH */
+  const flash = document.createElement("div");
+  flash.style.position = "fixed";
+  flash.style.inset = "0";
+  flash.style.background = "white";
+  flash.style.opacity = "0.9";
+  flash.style.zIndex = "999";
+  flash.style.transition = "opacity 0.8s ease";
+  document.body.appendChild(flash);
+
+  setTimeout(() => flash.style.opacity = "0", 100);
+  setTimeout(() => flash.remove(), 900);
+
+  /* 💗 BACKGROUND TRANSFORM */
+  document.body.style.background = 
+  "linear-gradient(135deg,#ff0080,#ff4da6,#ff66cc,#ff1a8c)";
+  document.body.style.backgroundSize = "300% 300%";
+  document.body.style.animation = "bgMove 6s ease infinite";
+
+  /* 🎆 HEART FIREWORKS */
+  for (let i = 0; i < 80; i++) {
+    const heart = document.createElement("div");
+    heart.innerHTML = ["💖","💘","💗","💞"][Math.floor(Math.random()*4)];
+    heart.style.position = "absolute";
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+    heart.style.fontSize = "20px";
+    heart.style.pointerEvents = "none";
+    heart.style.transform = `translate(-50%, -50%)`;
+    heart.style.transition = "all 2s ease-out";
+
+    document.body.appendChild(heart);
+
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = 200 + Math.random()*200;
+
+    setTimeout(() => {
+      heart.style.transform =
+        `translate(${Math.cos(angle)*radius}px, ${Math.sin(angle)*radius}px) scale(1.5)`;
+      heart.style.opacity = "0";
+    }, 50);
+
+    setTimeout(() => heart.remove(), 2000);
+  }
+
+  /* ✨ SPARKLE RAIN */
+  for (let i = 0; i < 60; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.innerHTML = "✨";
+    sparkle.style.position = "absolute";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = "-10px";
+    sparkle.style.fontSize = "18px";
+    sparkle.style.animation = "floatUp 4s linear forwards";
+    document.body.appendChild(sparkle);
+  }
+
+  /* 💌 TYPEWRITER MESSAGE */
   successMsg.style.display = "block";
-  successMsg.innerHTML = "YAYYY 🥰 I love you so much!";
+  successMsg.innerHTML = "";
+  const text = "YAYYY 🥰 I love you so much!";
+  let i = 0;
 
+  function typeWriter(){
+    if (i < text.length){
+      successMsg.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 50);
+    }
+  }
+  typeWriter();
+
+  /* 💖 BUTTON MORPH */
+  yesBtn.style.transform = "scale(1.5)";
+  yesBtn.style.boxShadow = "0 0 40px #ff99cc, 0 0 80px #ff66b3";
   yesBtn.innerHTML = "FOREVER 💍";
-  yesBtn.style.transform = "scale(1.15)";
+
+  /* 🎥 SUBTLE CAMERA SHAKE */
+  document.body.style.animation += ", shake 0.5s ease";
+
+  /* 🎶 ROMANTIC SWELL SOUND */
+  const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e3c7d.mp3?filename=romantic-ambient-110624.mp3");
+  audio.volume = 0.8;
+  audio.play();
+
+  /* 💌 SEND EMAIL */
+  emailjs.send("service_aetl4cb", "template_o737c9d", {
+    to_email: "swanitrivankar@gmail.com",
+    message: `Hi my love ❤️  
+You just clicked YES to being my Valentine 🥹💖  
+This is officially documented now — no backing out 😌  
+I’m so lucky to have you.  
+  
+Love,  
+Swanit`
+  });
+
 });
 
+
+/* =============================
+   🙈 NO BUTTON FUN
+============================= */
+const noBtn = document.getElementById("noBtn");
 const phrases = [
   "Are you sure?",
   "Really sure?",
@@ -227,23 +356,23 @@ const phrases = [
 
 let attempts = 0;
 
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
 function moveButton() {
   attempts++;
   noBtn.innerText = phrases[attempts % phrases.length];
 
-  const x = (Math.random() - 0.5) * 140;
-  const y = (Math.random() - 0.5) * 70;
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
 
   noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
 
   if (attempts >= 5) {
-    yesBtn.style.transform = "scale(1.25)";
-    noBtn.style.transform = "scale(0.5)";
+    yesBtn.style.transform = "scale(1.4)";
+    noBtn.style.transform = "scale(0.4)";
   }
 }
-
-noBtn.addEventListener("touchstart", moveButton);
-noBtn.addEventListener("mouseover", moveButton);
 </script>
 
 </body>
